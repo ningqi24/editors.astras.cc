@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<!-- AstraEditor -->
+<!-- Some icons are from "https://icon666.com/" and https://simpleicons.org/ -->
+
+<head>
+	<meta charset="utf-8">
+	<title>AstraEditor - 实用无上限</title>
+	<link rel="icon" href="./favicon.ico">
+	<link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+	<main>
+		<div class="titleBar">
+			<div class="titleBar-Logo">
+				<img class="titleBar-LogoImg" src="./images/logo-white.svg" alt="">
+				<img class="titleBar-LogoText" src="./images/Text.svg" alt="AstraEditor">
+			</div>
+			<div class="titleBar-Tabs">
+				<button class="theme-toggle" aria-label="切换主题">主题
+				</button>
+				<button class="lang-toggle" aria-label="切换语言">
+					<span class="lang-text">EN</span>
+				</button>
+				<button class="titleBar-TabButton" data-i18n="download">下载</button>
+				<button class="titleBar-TabButton" id="update" data-i18n="changelog">更新日志</button>
+				<button class="titleBar-TabButton" id="repo" data-i18n="repo">仓库</button>
+				<button class="titleBar-TabButton" id="report" data-i18n="feedback">反馈</button>
+				<script>
+					document.querySelector('#repo').addEventListener('click', () => {
+						window.open('https://github.com/AstraEditor', '_blank');
+					});
+					document.querySelector('#report').addEventListener('click', () => {
+						window.open('https://github.com/AstraEditor/scratch-gui/issues/new', '_blank');
+					});
+				</script>
+				<div class="titleBar-MoreContainer">
+					<button class="titleBar-MoreButton" aria-label="更多选项">
+						<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+							<circle cx="8" cy="3" r="1.5"></circle>
+							<circle cx="8" cy="8" r="1.5"></circle>
+							<circle cx="8" cy="13" r="1.5"></circle>
+						</svg>
+					</button>
+					<div class="titleBar-MoreDropdown"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="images">
+				<img class="images-title" src="./images/show.png" alt="">
+			</div>
+			<section class="head">
+				<div class="head-titles">
+					<img class="head-LogoText" src="./images/Text.svg" alt="AstraEditor">
+					<span class="head-Title" data-i18n="slogan">锤子, 而不是花束</span>
+				</div>
+				<div class="head-link">
+					<button class="head-link-online"><span data-i18n="tryOnline">在线体验</span>
+						<a class="head-link-release" href="https://editors.astras.top/online/editor.html" data-i18n="release">正式版
+													</a>
+						<a class="head-link-snapshot" href="https://editors.astras.top/snapshot/editor.html" data-i18n="snapshot">快照版
+						</a>
+					</button>
+					<button class="head-link-desktop" data-i18n="getDesktop">获取桌面端</button><br>
+				</div>
+			</section>
+			<section class="intro-section">
+				<div class="intro-text">
+					<span class="intro-title" data-i18n="fastAsLightning">闪电般迅速</span>
+					<span class="intro-intro" data-i18n="introText">AstraEditor 加入了更多功能, 使您的编程速度"快如闪电"</span>
+				</div>
+				<div class="intro-show">
+					<div class="intro-show-videos" id="paint">
+						<video class="intro-show-video" src="./images/paint.webm" muted>PAINT SHOW VIDEO</video>
+						<span class="intro-show-text" data-i18n="betterCostumeEditor">更好的造型编辑器</span>
+					</div>
+					<div class="intro-show-videos" id="addons">
+						<video class="intro-show-video" src="./images/addons.webm" muted>PAINT SHOW VIDEO</video>
+						<span class="intro-show-text" data-i18n="moreAddons">更多插件</span>
+					</div>
+					<div class="intro-show-videos" id="custom">
+						<video class="intro-show-video" src="./images/custom.webm" muted>PAINT SHOW VIDEO</video>
+						<span class="intro-show-text" data-i18n="customTheme">自定义主题</span>
+					</div>
+				</div>
+			</section>
+			<section class="download">
+				<div class="download-titles">
+					<div class="download-title" data-i18n="bornForYou">为你而生</div>
+					<div class="download-intro" data-i18n="downloadNow">即刻下载 AstraEditor</div>
+				</div>
+				<div class="download-button"></div>
+			</section>
+			<section class="changelog">
+				<div class="changelog-titles">
+					<div class="changelog-title" data-i18n="changelogTitle">更新日志</div>
+					<div class="changelog-intro" data-i18n="changelogIntro">查看 AstraEditor 的最新变化</div>
+				</div>
+				<div class="changelog-content"></div>
+			</section>
+
+			<div class="head-BackgroundAE">AE</div>
+		</div>
+
+		<div class="end">
+				<div class="end-left">
+					<div class="titleBar-Logo">
+						<img class="titleBar-LogoImg" src="./images/logo-white.svg" alt="">
+						<img class="titleBar-LogoText" src="./images/Text.svg" alt="AstraEditor">
+					</div>
+					<span class="endby" data-i18n="fromTeam">来自 AstrasTeam</span>
+					<span class="introend" data-i18n-html="projectNote">
+						本项目基于 TurboWarp 构建，但与 TurboWarp 项目组无关系
+					</span>
+				</div>
+			<div class="end-right">
+				<span class="link" data-i18n="moreLinks">更多链接</span>
+				<div style="display: flex;margin: 10px;">
+					<a class="iconLinkB" href="https://space.bilibili.com/3691007061264515">
+						<img class="iconLink" src="./images/bilibili.svg" alt="bilibili">
+					</a>
+					<a class="iconLinkB" href="https://qm.qq.com/q/ynYzV85oHY">
+						<img class="iconLink" src="./images/qq.png" alt="qq">
+					</a>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<span class="footerT" data-i18n="copyright">©2026 AstrasTeam 保留所有权利</span>
+		</footer>
+	</main>
+	<script src="./js/main.js"></script>
+</body>
+
+</html>
