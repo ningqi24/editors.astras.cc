@@ -45,9 +45,9 @@
             'noLogs': '暂无更新日志',
             // 页脚
             'fromTeam': '来自 AstrasTeam',
-            'projectNote': '本项目基于 TurboWarp 构建，但与 TurboWarp 项目组无关系',
+            'projectNote': '本项目为 AstraEditor 非官方定制版，基于 TurboWarp 构建。与 TurboWarp 项目组及 AstraEditor 官方团队均无关系，仅供学习交流使用。',
             'moreLinks': '更多链接',
-            'copyright': '©2026 AstrasTeam 保留所有权利'
+            'copyright': '©2026 本站为 AstraEditor 非官方定制版 | AstraEditor 原始版权归 AstraEditor 团队所有 | 仅供学习交流，严禁商业用途'
         },
         'en': {
             // Title bar
@@ -90,9 +90,9 @@
             'noLogs': 'No changelog available',
             // Footer
             'fromTeam': 'From AstrasTeam',
-            'projectNote': 'This project is built on TurboWarp but is not affiliated with the TurboWarp team.',
+            'projectNote': 'This is an unofficial customized version of AstraEditor, built on TurboWarp. Not affiliated with the TurboWarp team or AstraEditor official team. For learning purposes only.',
             'moreLinks': 'More Links',
-            'copyright': '©2026 AstrasTeam. All rights reserved.'
+            'copyright': '©2026 Unofficial customized version of AstraEditor | Original copyright belongs to AstraEditor team | For learning only, no commercial use'
         }
     };
 
@@ -657,9 +657,6 @@
             </h4>
             <a class="download-distro-btn" href="https://download.astras.cc">
                 <span>https://download.astras.cc</span>
-            </a>
-            <a class="download-distro-btn" href="https://astras.ct.ws/">
-                <span>https://astras.ct.ws/</span>
             </a>
 
         `;
