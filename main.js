@@ -415,6 +415,13 @@
         updatePerspectivePosition();
     }
 
+    // 懒加载：视频进入视口/激活时才加载 src，避免首屏预下载大体积视频
+    function loadVideoSrc(vid) {
+        if (vid && vid.dataset.src && !vid.getAttribute('src')) {
+            vid.src = vid.dataset.src;
+        }
+    }
+
     function initIntroTitleAnimation() {
         const introTitle = document.querySelector('.intro-title');
         const introText = document.querySelector('.intro-text');
@@ -434,7 +441,7 @@
                         if (introVideoTexts) introVideoTexts.forEach(i => i.classList.add('animate'));
                         if (introVideo) introVideo.forEach(i => i.classList.add('animate'));
                     });
-                    video.play().catch((e) => {console.error(e)});
+                    loadVideoSrc(video); video.play().catch((e) => {console.error(e)});
                     observer.unobserve(introTitle);
                 }
             });
@@ -474,7 +481,7 @@
                     const vid = video.querySelector('.intro-show-video');
                     if (vid) {
                         vid.currentTime = 0;
-                        vid.play().catch(() => {});
+                        loadVideoSrc(vid); vid.play().catch(() => {});
                     }
                 }
             });
