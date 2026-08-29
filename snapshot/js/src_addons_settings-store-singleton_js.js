@@ -843,7 +843,7 @@ const manifest = {
   editorOnly: true,
   noTranslations: true,
   name: 'Customizable block shape',
-  enabledByDefault: true,
+  enabledByDefault: false,
   description: 'Adjust the padding, corner radius, and notch height of blocks.',
   tags: ['theme'],
   credits: [{
