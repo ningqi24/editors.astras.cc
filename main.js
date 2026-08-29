@@ -527,230 +527,38 @@
 
     async function initDownloadButton() {
         const downloadButton = document.querySelector('.download-button');
-        const tabDownloadButton = document.querySelector('.titleBar-TabButton');
+        const tabDownloadButton = document.querySelector('.titleBar-TabButton[data-i18n="download"]');
         const desktopBtn = document.querySelector('.head-link-desktop');
-        const downloadSection = document.querySelector('.download');
+        const DOWNLOAD_URL = 'https://download.astras.cc';
 
-        if (!downloadButton) return;
-
-        // 从远程获取版本号
-        let VERSION = '1.1.4'; // 默认版本
-        try {
-            const response = await fetch('https://raw.githubusercontent.com/AstraEditor/Desktop/refs/heads/master/docs/version.json');
-            if (response.ok) {
-                const versionData = await response.json();
-                VERSION = versionData.latest || VERSION;
-            }
-        } catch (e) {
-            console.warn('获取版本信息失败，使用默认版本', e);
+        // 直接跳转至下载站
+        function redirectToDownload() {
+            window.location.href = DOWNLOAD_URL;
         }
 
-        // GitHub releases 基础 URL
-        const RELEASES_BASE = 'https://github.com/AstraEditor/Desktop/releases/download';
-
-        // 下载资源映射
-        const downloadAssets = {
-            windows: {
-                x64: 'AstraEditor-Setup-{version}-x64.exe',
-                ia32: 'AstraEditor-Setup-{version}-ia32.exe',
-                arm64: 'AstraEditor-Setup-{version}-arm64.exe'
-            },
-            windowsLegacy: {
-                x64: 'AstraEditor-Legacy-Setup-{version}-x64.exe',
-                ia32: 'AstraEditor-Legacy-Setup-{version}-ia32.exe'
-            },
-            macos: 'AstraEditor-Setup-{version}.dmg',
-            macosLegacy: {
-                '11': 'AstraEditor-Legacy-11-Setup-{version}.dmg',
-                '10.15': 'AstraEditor-Legacy-10.15-Setup-{version}.dmg',
-                '10.13-10.14': 'AstraEditor-Legacy-10.13-10.14-Setup-{version}.dmg'
-            },
-            linux: {
-                deb: {
-                    x64: 'AstraEditor-linux-amd64-{version}.deb',
-                    arm64: 'AstraEditor-linux-arm64-{version}.deb',
-                    armv7l: 'AstraEditor-linux-armv7l-{version}.deb'
-                },
-                appimage: {
-                    x64: 'AstraEditor-linux-x86_64-{version}.AppImage',
-                    arm64: 'AstraEditor-linux-arm64-{version}.AppImage',
-                    armv7l: 'AstraEditor-linux-armv7l-{version}.AppImage'
-                },
-                tarball: {
-                    x64: 'AstraEditor-linux-x64-{version}.tar.gz',
-                    arm64: 'AstraEditor-linux-arm64-{version}.tar.gz',
-                    armv7l: 'AstraEditor-linux-armv7l-{version}.tar.gz'
-                },
-                rpm: {
-                    x64: 'AstraEditor-linux-x86_64-{version}.rpm',
-                    arm64: 'AstraEditor-linux-aarch64-{version}.rpm',
-                    armv7l: 'AstraEditor-linux-armv7l-{version}.rpm'
-                },
-                pacman: {
-                    x64: 'AstraEditor-linux-x64-{version}.pkg.tar.zst',
-                    arm64: 'AstraEditor-linux-aarch64-{version}.pkg.tar.zst',
-                    armv7l: 'AstraEditor-linux-armv7l-{version}.pkg.tar.zst'
-                }
-            }
-        };
-
-        // 生成下载链接
-        function getDownloadUrl(asset) {
-            return `${RELEASES_BASE}/v${VERSION}/${asset.replace(/{version}/g, VERSION)}`;
-        }
-
-        // 检测平台
-        const platform = navigator.platform.toLowerCase();
-        const userAgent = navigator.userAgent.toLowerCase();
-
-        // 平台图标映射
-        const platformIcons = {
-            windows: './images/windows.svg',
-            macos: './images/apple.svg',
-            linux: './images/linux.svg'
-        };
-
-        let detectedPlatform = 'other';
-        let platformName = '其他平台';
-        let platformIcon = '';
-
-        if (platform.includes('win') || userAgent.includes('windows')) {
-            detectedPlatform = 'windows';
-            platformName = 'Windows';
-            platformIcon = platformIcons.windows;
-        } else if (platform.includes('mac') || userAgent.includes('macintosh') || userAgent.includes('mac os x')) {
-            detectedPlatform = 'macos';
-            platformName = 'macOS';
-            platformIcon = platformIcons.macos;
-        } else if (platform.includes('linux') || userAgent.includes('linux')) {
-            detectedPlatform = 'linux';
-            platformName = 'Linux';
-            platformIcon = platformIcons.linux;
-        }
-
-        // 创建下载按钮 HTML
-        const downloadTextMap = {
-            windows: t('downloadWindows'),
-            macos: t('downloadMacOS'),
-            linux: t('downloadLinux')
-        };
-        downloadButton.innerHTML = `
-            <button class="download-btn download-btn-primary" data-platform="${detectedPlatform}">
-                <span class="download-btn-text">${downloadTextMap[detectedPlatform] || `${t('downloadLinux')}`}</span>
-                <img class="download-btn-icon" src="${platformIcon}" alt="${platformName}">
-            </button>
-            <div class="download-other-platforms">
-                <span class="download-other-label">${t('otherPlatforms')}</span>
-                <button class="download-btn download-btn-secondary" data-platform="windows">
-                    <img src="./images/windows.svg" alt="Windows"> Windows
+        // 下载区域：渲染简化按钮并绑定跳转
+        if (downloadButton) {
+            downloadButton.innerHTML = `
+                <button class="download-btn download-btn-primary">
+                    <span class="download-btn-text">${t('downloadNow')}</span>
                 </button>
-                <button class="download-btn download-btn-secondary" data-platform="macos">
-                    <img src="./images/apple.svg" alt="macOS"> macOS
-                </button>
-                <button class="download-btn download-btn-secondary" data-platform="linux">
-                    <img src="./images/linux.svg" alt="Linux"> Linux
-                </button>
-            </div>
-
-            <h4>
-                <span>${t('Other download sites')}</span>
-            </h4>
-            <a class="download-distro-btn" href="https://download.astras.cc">
-                <span>https://download.astras.cc</span>
-            </a>
-
-        `;
-
-        // 点击"获取桌面端"按钮滚动到下载区域
-        if (desktopBtn && downloadSection) {
-            desktopBtn.addEventListener('click', () => {
-                downloadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            });
-            tabDownloadButton.addEventListener('click', () => {
-                downloadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            })
-        }
-
-        // 显示 Linux 发行版选择弹窗
-        function showLinuxDistroModal() {
-            const existingModal = document.querySelector('.download-modal');
-            if (existingModal) existingModal.remove();
-
-            const modal = document.createElement('div');
-            modal.className = 'download-modal';
-            modal.innerHTML = `
-                <div class="download-modal-backdrop"></div>
-                <div class="download-modal-content">
-                    <div class="download-modal-header">
-                        <span>${t('selectDistro')}</span>
-                        <button class="download-modal-close">&times;</button>
-                    </div>
-                    <div class="download-modal-body">
-                        <a class="download-distro-btn" href="${getDownloadUrl(downloadAssets.linux.pacman.x64)}" target="_blank">
-                            <img src="./images/archlinux.svg" alt="Arch Linux">
-                            <span>${t('archLinux')}</span>
-                        </a>
-                        <a class="download-distro-btn" href="${getDownloadUrl(downloadAssets.linux.deb.x64)}">
-                            <img src="./images/debian.svg" alt="Debian">
-                            <span>${t('debianUbuntu')}</span>
-                        </a>
-                        <a class="download-distro-btn" href="${getDownloadUrl(downloadAssets.linux.rpm.x64)}">
-                            <img src="./images/redhat.svg" alt="rpm">
-                            <span>${t('rpm')}</span>
-                        </a>
-                        <a class="download-distro-btn" href="${getDownloadUrl(downloadAssets.linux.appimage.x64)}">
-                            <img src="./images/linux.svg" alt="AppImage">
-                            <span>${t('appImage')}</span>
-                        </a>
-                        <a class="download-distro-btn" href="${getDownloadUrl(downloadAssets.linux.tarball.x64)}">
-                            <img src="./images/linux.svg" alt="tarball">
-                            <span>${t('tarball')}</span>
-                        </a>
-                    </div>
-                </div>
+                <h4>
+                    <span>${t('Other download sites')}</span>
+                </h4>
+                <a class="download-distro-btn" href="${DOWNLOAD_URL}">
+                    <span>${DOWNLOAD_URL}</span>
+                </a>
             `;
-            document.body.appendChild(modal);
-
-            const closeModal = () => modal.remove();
-            modal.querySelector('.download-modal-backdrop').addEventListener('click', closeModal);
-            modal.querySelector('.download-modal-close').addEventListener('click', closeModal);
+            downloadButton.querySelector('.download-btn-primary').addEventListener('click', redirectToDownload);
         }
 
-        // 执行下载
-        function performDownload(platformType) {
-            let downloadUrl = '';
-            switch (platformType) {
-                case 'windows':
-                    downloadUrl = getDownloadUrl(downloadAssets.windows.x64);
-                    break;
-                case 'macos':
-                    downloadUrl = getDownloadUrl(downloadAssets.macos);
-                    break;
-                case 'linux':
-                    showLinuxDistroModal();
-                    return;
-            }
-            if (downloadUrl) {
-                window.location.href = downloadUrl;
-            }
+        // 桌面端按钮 / 下载标签按钮 -> 直接跳转下载站
+        if (desktopBtn) {
+            desktopBtn.addEventListener('click', redirectToDownload);
         }
-
-        // 下载按钮点击事件
-        downloadButton.querySelectorAll('.download-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                performDownload(btn.dataset.platform);
-            });
-        });
-
-        // 下载按钮点击事件
-        downloadButton.querySelectorAll('.download-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const platform = btn.dataset.platform;
-                if (platform === 'linux') {
-                    showLinuxDistroModal();
-                }
-            });
-        });
+        if (tabDownloadButton) {
+            tabDownloadButton.addEventListener('click', redirectToDownload);
+        }
     }
 
     async function initUpdateLogs() {
