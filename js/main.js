@@ -27,6 +27,7 @@
             // 下载
             'bornForYou': '为你而生',
             'downloadNow': '即刻下载 AstraEditor',
+            'gotoDownloadSite': '跳转到下载站',
             'downloadWindows': '下载 Windows 版本',
             'downloadMacOS': '下载 macOS 版本',
             'downloadLinux': '下载 Linux 版本',
@@ -73,6 +74,7 @@
             // Download
             'bornForYou': 'Born for You',
             'downloadNow': 'Download AstraEditor Now',
+            'gotoDownloadSite': 'Go to download site',
             'downloadWindows': 'Download for Windows',
             'downloadMacOS': 'Download for macOS',
             'downloadLinux': 'Download for Linux',
@@ -540,14 +542,8 @@
         if (downloadButton) {
             downloadButton.innerHTML = `
                 <button class="download-btn download-btn-primary">
-                    <span class="download-btn-text">${t('downloadNow')}</span>
+                    <span class="download-btn-text">${t('gotoDownloadSite')}</span>
                 </button>
-                <h4>
-                    <span>${t('Other download sites')}</span>
-                </h4>
-                <a class="download-distro-btn" href="${DOWNLOAD_URL}">
-                    <span>${DOWNLOAD_URL}</span>
-                </a>
             `;
             downloadButton.querySelector('.download-btn-primary').addEventListener('click', redirectToDownload);
         }
