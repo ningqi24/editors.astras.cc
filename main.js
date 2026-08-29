@@ -530,7 +530,7 @@
             threshold: 0.3
         });
 
-        const container = document.querySelector('.intro-show');
+        const container = document.querySelector('.intro-section') || document.querySelector('.intro-show');
         if (container) observer.observe(container);
     }
 

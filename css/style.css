@@ -974,43 +974,49 @@ small {
 }
 
 /* ==================== 移动端适配 ==================== */
+
+/* ==================== 移动端适配 ==================== */
 @media screen and (max-width: 768px) {
-    /* 导航栏：横向滚动 */
+    /* --- 导航栏：横向滚动 --- */
     .titleBar {
-        width: calc(100% - 20px);
-        padding: 0 10px;
-        height: 50px;
+        width: calc(100% - 20px) !important;
+        padding: 0 10px !important;
+        height: 50px !important;
     }
-    .titleBar-Logo { margin-left: 5px; }
-    .titleBar-LogoText { width: 90px; }
-    .titleBar-LogoImg { width: 28px; }
+    .titleBar-Logo { margin-left: 5px; flex-shrink: 0; }
+    .titleBar-LogoText { width: 80px !important; }
+    .titleBar-LogoImg { width: 26px !important; }
     .titleBar-Tabs {
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        -ms-overflow-style: none;
         flex-wrap: nowrap;
         margin-left: auto;
     }
     .titleBar-Tabs::-webkit-scrollbar { display: none; }
-    .titleBar-TabButton,
-    .theme-toggle,
-    .lang-toggle {
-        padding: 6px 8px;
-        margin: 0 2px;
-        font-size: 12px;
+    .titleBar-TabButton, .theme-toggle, .lang-toggle {
+        padding: 6px 8px !important;
+        margin: 0 2px !important;
+        font-size: 12px !important;
         height: 28px;
         flex-shrink: 0;
-        width: auto;
+        width: auto !important;
     }
 
-    /* 公告栏 */
-    .unofficial-banner { font-size: 12px; padding: 8px 12px; line-height: 1.6; }
+    /* --- 公告栏 --- */
+    .unofficial-banner { font-size: 11px; padding: 6px 10px; line-height: 1.5; }
 
-    /* 首屏主视觉 */
-    .head { height: auto; min-height: 100vh; }
-    .head-LogoText { width: 80vw; max-width: 400px; }
-    .images-title { width: 90%; top: 120px; }
+    /* --- 首屏主视觉 --- */
+    .head {
+        height: auto !important;
+        min-height: 100vh;
+        padding-top: 60px;
+        box-sizing: border-box;
+    }
+    .head-LogoText { width: 75vw !important; max-width: 350px; }
+    .images-title { width: 90% !important; top: 100px !important; }
     .head-Title { font-size: 14px; }
     .head-link {
         display: flex;
@@ -1020,111 +1026,131 @@ small {
     }
     .head-link-online, .head-link-desktop {
         font-size: 14px !important;
-        padding: 8px 16px !important;
+        padding: 8px 14px !important;
     }
-
-    /* 介绍区：纵向堆叠 */
-    .intro-section {
-        flex-direction: column;
-        padding: 60px 20px;
-        min-height: auto;
-        gap: 30px;
-    }
-    .intro-text {
-        max-width: 100%;
-        transform: none;
-        text-align: center;
-    }
-    .intro-title { font-size: 36px; }
-    .intro-show, .intro-show-video { width: 90vw; }
-    .intro-show { width: 90vw; }
-    .intro-show-text { font-size: 16px; margin-top: -40px; }
-
-    /* 下载区 */
-    .download { padding: 60px 20px; min-height: auto; }
-    .download-title { font-size: 56px; }
-    .download-btn-primary {
-        width: 90vw;
-        max-width: 300px;
-        height: 70px;
-        font-size: 16px;
-    }
-    .download-modal-content { width: 90vw; }
-
-    /* 更新日志 */
-    .changelog { padding: 40px 15px; }
-    .changelog-title { font-size: 24px; }
-    .changelog-version { font-size: 36px; }
-    .changelog-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
-
-    /* 页脚社区区：纵向堆叠 */
-    .end {
-        display: flex;
-        flex-direction: column;
-        padding: 30px 20px;
-        gap: 30px;
-        margin-top: 60px;
-    }
-    .end-left, .end-right {
-        position: relative;
-        top: auto;
-        left: auto;
-        right: auto;
-    }
-    .end-left .introend { max-width: 100%; }
-
-    /* 背景大字 AE */
-    .head-BackgroundAE { font-size: 500px; }
-}
-
-@media screen and (max-width: 480px) {
-    /* 导航栏 */
-    .titleBar { height: 45px; }
-    .titleBar-LogoText { width: 70px; }
-    .titleBar-LogoImg { width: 24px; }
-    .titleBar-TabButton,
-    .theme-toggle,
-    .lang-toggle {
-        padding: 4px 6px;
-        margin: 0 1px;
-        font-size: 11px;
-        height: 26px;
-        width: auto;
-    }
-
-    /* 公告栏 */
-    .unofficial-banner { font-size: 10px; padding: 6px 8px; }
-
-    /* 首屏 */
-    .head-LogoText { width: 95vw; }
-    .images-title { top: 90px; width: 95%; }
-    .head-link-online, .head-link-desktop {
-        font-size: 12px !important;
-        padding: 6px 12px !important;
-    }
-
-    /* 介绍区 */
-    .intro-title { font-size: 24px; }
-    .intro-intro { font-size: 14px; }
-
-    /* 下载区 */
-    .download-title { font-size: 36px; }
-    .download-btn-primary {
-        height: 60px;
+    .head-link-snapshot {
+        width: auto !important;
+        padding: 4px 8px !important;
+        margin: 0 0 0 8px !important;
         font-size: 14px;
     }
 
-    /* 更新日志 */
-    .changelog-version { font-size: 24px; }
-    .changelog-item { padding: 12px; }
-    .changelog-notes { font-size: 13px; padding-left: 16px; }
+    /* --- 介绍区：纵向堆叠 --- */
+    .intro-section {
+        flex-direction: column !important;
+        padding: 40px 16px !important;
+        min-height: auto !important;
+        gap: 20px;
+    }
+    .intro-text {
+        max-width: 100% !important;
+        transform: none !important;
+        text-align: center;
+    }
+    .intro-title { font-size: 32px !important; }
+    .intro-intro { font-size: 14px; }
+    .intro-show {
+        width: 100% !important;
+        min-height: 200px;
+    }
+    .intro-show-video { width: 100% !important; }
+    .intro-show-videos {
+        align-items: center !important;
+    }
+    .intro-show-text {
+        font-size: 14px !important;
+        margin-top: -30px !important;
+        margin-right: 0 !important;
+    }
 
-    /* 页脚 */
-    .footerT { font-size: 10px; }
-    .endby, .link { font-size: 16px; }
-    .head-BackgroundAE { font-size: 350px; }
+    /* --- 下载区 --- */
+    .download {
+        padding: 40px 16px !important;
+        min-height: auto !important;
+    }
+    .download-title { font-size: 48px !important; }
+    .download-title-small { font-size: 40px !important; }
+    .download-btn-primary {
+        width: 90vw !important;
+        max-width: 280px;
+        height: 64px !important;
+        font-size: 15px !important;
+    }
+    .download-modal-content { width: 90vw !important; }
+
+    /* --- 更新日志 --- */
+    .changelog { padding: 30px 12px !important; }
+    .changelog-title { font-size: 22px !important; }
+    .changelog-version { font-size: 28px !important; }
+    .changelog-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px;
+    }
+    .changelog-item { padding: 12px !important; }
+
+    /* --- 页脚社区区：纵向堆叠 --- */
+    .end {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 30px 16px !important;
+        gap: 24px;
+        margin-top: 40px !important;
+    }
+    .end-left, .end-right {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+    }
+    .end-left .introend { max-width: 100% !important; }
+
+    /* --- 背景大字 AE：缩小 --- */
+    .head-BackgroundAE { font-size: 400px !important; }
+}
+
+@media screen and (max-width: 480px) {
+    /* --- 导航栏 --- */
+    .titleBar { height: 44px !important; }
+    .titleBar-LogoText { width: 60px !important; }
+    .titleBar-LogoImg { width: 22px !important; }
+    .titleBar-TabButton, .theme-toggle, .lang-toggle {
+        padding: 4px 6px !important;
+        margin: 0 1px !important;
+        font-size: 10px !important;
+        height: 24px;
+        width: auto !important;
+    }
+
+    /* --- 公告栏 --- */
+    .unofficial-banner { font-size: 9px; padding: 4px 6px; }
+
+    /* --- 首屏 --- */
+    .head-LogoText { width: 90vw !important; }
+    .images-title { top: 80px !important; width: 95% !important; }
+    .head-link-online, .head-link-desktop {
+        font-size: 12px !important;
+        padding: 6px 10px !important;
+    }
+
+    /* --- 介绍区 --- */
+    .intro-title { font-size: 22px !important; }
+    .intro-show { min-height: 150px; }
+
+    /* --- 下载区 --- */
+    .download-title { font-size: 32px !important; }
+    .download-title-small { font-size: 28px !important; }
+    .download-btn-primary {
+        height: 56px !important;
+        font-size: 13px !important;
+    }
+
+    /* --- 更新日志 --- */
+    .changelog-version { font-size: 20px !important; }
+    .changelog-notes { font-size: 12px; padding-left: 14px; }
+
+    /* --- 页脚 --- */
+    .footerT { font-size: 9px; }
+    .endby, .link { font-size: 14px; }
+    .head-BackgroundAE { font-size: 250px !important; }
 }
