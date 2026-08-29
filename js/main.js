@@ -574,34 +574,49 @@
         })
 
         let logs = [];
+        // 更新日志源：jsDelivr CDN 优先（国内快，自动同步 GitHub），本地兜底
+        const sources = [
+            'https://cdn.jsdelivr.net/gh/AstraEditor/Desktop@master/docs/changelog.json',
+            './changelog.json'
+        ];
         try {
-            const response = await fetch('https://raw.githubusercontent.com/AstraEditor/Desktop/refs/heads/master/docs/changelog.json');
-            if (response.ok) {
-                logs = await response.json();
+            for (const url of sources) {
+                try {
+                    const controller = new AbortController();
+                    const timer = setTimeout(() => controller.abort(), 5000);
+                    const response = await fetch(url, { signal: controller.signal });
+                    clearTimeout(timer);
+                    if (response.ok) {
+                        logs = await response.json();
+                        if (logs && logs.length > 0) break;
+                    }
+                } catch (e) {
+                    continue;
+                }
             }
         } catch (e) {
             console.warn('获取更新日志失败', e);
+        }
+
+        if (!logs || logs.length === 0) {
             changelogContent.innerHTML = `<div class="changelog-error">${t('loadFailed')}</div>`;
             return;
         }
 
-        if (!logs || logs.length === 0) {
-            changelogContent.innerHTML = `<div class="changelog-empty">${t('noLogs')}</div>`;
-            return;
-        }
-
-        // 渲染更新日志
-        changelogContent.innerHTML = logs.map(log => `
+        // 渲染更新日志（兼容 note/notes 两种字段名）
+        changelogContent.innerHTML = logs.map(log => {
+            const notes = log.note || log.notes || [];
+            return `
             <div class="changelog-item">
                 <div class="changelog-header">
                     <code class="changelog-version">v${log.version}</code>
                     <span class="changelog-date">${log.date}</span>
                 </div>
                 <ul class="changelog-notes">
-                    ${log.notes.map(note => `<li>${note}</li>`).join('')}
+                    ${notes.map(note => `<li>${note}</li>`).join('')}
                 </ul>
-            </div>
-        `).join('');
+            </div>`;
+        }).join('');
     }
 
     function initThemeToggle() {
