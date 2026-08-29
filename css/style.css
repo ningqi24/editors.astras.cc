@@ -976,6 +976,26 @@ small {
 /* ==================== 移动端适配 ==================== */
 
 /* ==================== 移动端适配 ==================== */
+
+/* 镜像加速描述区 */
+.mirror-info {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.mirror-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 12px;
+}
+.mirror-desc {
+    font-size: 14px;
+    color: color-mix(in srgb, var(--text-color), transparent 30%);
+    line-height: 1.8;
+}
+
 @media screen and (max-width: 768px) {
     /* --- 导航栏：横向滚动 --- */
     .titleBar {
@@ -1109,6 +1129,10 @@ small {
     .head-BackgroundAE { font-size: 400px !important; }
 }
 
+
+    /* 镜像加速区 */
+    .mirror-title { font-size: 22px !important; }
+    .mirror-desc { font-size: 13px !important; }
 @media screen and (max-width: 480px) {
     /* --- 导航栏 --- */
     .titleBar { height: 44px !important; }
